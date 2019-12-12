@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <header>
+    <style>
+      body {
+        margin: 20px;
+      }
+      div.uploadHeader {
+        width: 100%;
+        height: 30px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+      }
+      div.left {
+        position: fixed;
+      }
+      div.right {
+        left: 200px;
+        position: fixed;
+      }
+      a.home {
+        color: black;
+        font-size: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        padding-left: 15px;
+      }
+      table.tableHeader {
+        border-collapse: collapse;
+        text-align: left;
+        line-height: 1.5;
+        margin-top: 20px;
+      }
+      table.tableHeader thead th {
+        width: 350px;
+        padding: 10px;
+        font-weight: bold;
+        vertical-align: top;
+        color: #369;
+        border-bottom: 3px solid #036;
+      }
+      table.tableHeader tbody th {
+        width: 150px;
+        padding: 10px;
+        font-weight: bold;
+        vertical-align: top;
+        border-bottom: 1px solid #ccc;
+        background: #f3f6f7;
+      }
+      table.tableHeader td {
+        width: 350px;
+        padding: 10px;
+        vertical-align: top;
+        border-bottom: 1px solid #ccc;
+      }
+    </style>
+  </header>
+  <body>
+    <div class="uploadHeader">
+      <div class="left">
+      <a class="home" href="/">Home</a>
+      </div>
+      <div class="right">
+      <form action="http://192.168.99.100:5000/upload" method="POST" enctype="multipart/form-data">
+          <input type="file" name="file"/>
+          <input type="submit"/>
+      </form>
+      </div>
+    </div>
+    <table class="tableHeader">
+      <thead>
+      <tr>
+        <th scope="cols">FileName</th>
+        <th scope="cols">Size(bytes)</th>
+        <th scope="cols">TimeAdded</th>
+        <th scope ="cols">Recognition</th>
+        <th scope ="cols">ImgProcessed</th>
+        <th scope ="cols">Text</th>
+      </tr>
+      </thead>
+      <tbody id="tableBody">
+        {% for file in files %}
+          <tr>
+            <td><a href="/upload/img/{{ file.name }}">{{ file.name }}</a></td>
+            <td>{{ file.size }}</td>
+            <td>{{ file.time }}</td>
+            <td>
+              <form action="http://192.168.99.100:5000/upload/process/{{ file.name }}" method="GET">
+                <button>Click to start process</button>
+              </form>
+            </td>
+            <td><a href="/upload/img_processed/{{ file.name_processed }}">{{ file.name_processed }}</a></td>
+            <td><a href="/upload/text/{{ file.name_txt }}">{{ file.name_txt }}</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>

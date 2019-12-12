@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        .body{
+            display: grid;
+            position: relative;
+            padding-top: 100px;
+        }
+        body a {
+            color: black;
+            font-size: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .body_p{
+            color: black;
+            text-align: left;
+            font-weight: 500;
+            font-size: 16px;
+            padding-left: 20px;
+            line-height: 200%;
+        }
+        .header{
+            position: fixed;
+            right: 0;
+            left: 0;
+            text-align: left;
+        }
+        .header h2{
+            color:black;
+            display: inline-block;
+            padding-left: 20px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+        .upload{
+            padding-left: 10px;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+            <h2>Seungtae - 데이터센터프로그래밍(2019_2학기) 프로젝트4</h2>
+    </div>
+    <div class="body">
+        <p class="body_p">
+            문자가 포함된 이미지를 전처리하고, 그 이미지에서 문자만 추출합니다. <br><br>
+            [사용 순서] <br><br>
+            1. 텍스트를 추출할 이미지를 업로드합니다.<br>
+            2. "Click to start process" 버튼을 눌러 프로세스를 시작합니다.<br>
+            3. 30초 ~ 40초 후에 페이지를 새로고침합니다.<br>
+            4. 파일 이름을 클릭하면 결과를 확인할 수 있습니다.<br><br>
+            시작하려면 아래 Upload를 클릭하세요.<br>
+            (주의: ".jpg" 확장자 파일만 업로드 할 수 있고, 파일 이름은 영어여야 합니다.)
+        </p>
+    </div>
+    <div class="upload">
+        <a href="/upload">Upload</a>
+    </div>
+</body>
+</html>

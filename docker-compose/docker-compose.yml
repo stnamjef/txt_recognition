@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+  flask_server:
+    image: stnamjef/flask:2.0
+    networks:
+      internal:
+        aliases:
+          - flask_server
+    ports:
+     - 5000:8080
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role != manager]
+    command: >
+      /bin/bash -c "
+      cd /test &&
+      ./server_up.sh &&
+      ./running.py"
+  preprocess:
+    image: stnamjef/python_base:1.6
+    networks:
+      internal:
+        aliases: 
+          - preprocess
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role != manager]
+    command: >
+      /bin/bash -c "
+      cd /test &&
+      ./preprocess_main.py &&
+      /bin/bash"
+  tesrct:
+    image: stnamjef/tesseract:1.5
+    networks:
+      internal:
+        aliases: 
+          - tesrct
+    deploy:
+      replicas: 1
+      placement:
+        constraints: [node.role != manager]
+    command: >
+      /bin/bash -c "
+      cd /test &&
+      ./tesrct_main.py &&
+      /bin/bash"
+networks:
+  internal:
+    driver: overlay
+    ipam:
+      config: 
+      - subnet: 192.168.0.0/24
